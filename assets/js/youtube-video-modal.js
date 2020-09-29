@@ -82,7 +82,7 @@ jQuery.fn.sp_ytube_playlist = function() {
 			var html = '<div class="sp-inner-section arrow_box">';
 			html += '<button class="sp-close-btn">&times;</button>';
 			html += '<div class="sp-playlist-title">' + title + '</div>';
-			html += '<div class="sp-playlist-content"></div>';
+			html += '<div class="sp-playlist-content"><center>Loading...</center></div>';
 			html +=	'</div>';
 
       $parent.prepend( html );
