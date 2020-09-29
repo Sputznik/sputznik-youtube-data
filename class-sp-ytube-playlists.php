@@ -26,7 +26,7 @@ class SP_YTUBE_PLAYLISTS extends SP_YTUBE_SHORTCODE{
 	function getDefaultAtts(){
 		return array(
 			'channel'	 		=> '',
-			'maxResults' 	=> 10
+			'maxresults' 	=> 10
 		);
 	}
 
@@ -34,7 +34,7 @@ class SP_YTUBE_PLAYLISTS extends SP_YTUBE_SHORTCODE{
 		$baseURL = $this->getBaseURL() . "playlists";
 		$args = array(
 			'part'	=> array( 'contentDetails', 'snippet', 'id' ),
-			'maxResults' => isset( $atts['maxResults'] )? $atts['maxResults'] : 10,
+			'maxResults' => isset( $atts['maxresults'] )? $atts['maxresults'] : 10,
 			'key'	=> $this->getAPIKey(),
 			'channelId'	=> $atts['channel']
 		);

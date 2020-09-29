@@ -14,10 +14,11 @@
 			return array();
 		}
 
-		function getShortcodeAtts( $atts ){ return shortcode_atts( $this->getDefaultAtts(), $atts, $this->shortcode_str ); }
+		function getShortcodeAtts( $atts ){
+			return shortcode_atts( $this->getDefaultAtts(), $atts, $this->shortcode_str );
+		}
 
 		function shortcode( $atts ){
-
 			$atts = $this->getShortcodeAtts( $atts );
 
 			ob_start();
@@ -25,6 +26,9 @@
 			do_action( $this->shortcode_str . "_prehook", $atts );
 
 			$url = $this->getAPIURL( $atts );
+
+
+			//echo $url;
 
 			if( $url ){
 				$response = $this->getAPIResponse( $url );
@@ -47,7 +51,10 @@
 
 		function getBaseURL(){ return 'https://www.googleapis.com/youtube/v3/'; }
 
-		function getAPIKey(){ return 'AIzaSyBaXfTiNGvfEIdTT6wf0UjLMDcUIh9kqEI'; }
+		function getAPIKey(){
+			$admin_settings = $this->get_admin_settings();
+			return isset( $admin_settings['api_key'] ) ? $admin_settings['api_key'] : '';
+		}
 
 		function constructUrl( $baseURL, $args ){
 			$url = $baseURL . "?";
@@ -67,7 +74,7 @@
 
 
 
-		function getAPIResponse( $url, $api_key = false, $cache_expiration = 600 ){
+		function getAPIResponse( $url, $api_key = false, $cache_expiration = 60000 ){
 			$cache_key = md5( $url );
 
 			$data = array();

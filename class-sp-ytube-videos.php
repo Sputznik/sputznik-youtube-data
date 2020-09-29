@@ -11,7 +11,7 @@ class SP_YTUBE_VIDEOS extends SP_YTUBE_SHORTCODE{
 		return array(
 			'channel'	 		=> '',
 			'playlist'	 	=> '',
-			'maxResults' 	=> 10
+			'maxresults' 	=> 10
 		);
 	}
 
@@ -28,7 +28,7 @@ class SP_YTUBE_VIDEOS extends SP_YTUBE_SHORTCODE{
 			'part'	=> array( 'contentDetails', 'snippet', 'id' ),
 			'playlistId'	=> $atts['playlist'],
 			'key'	=> $this->getAPIKey(),
-			'maxResults' => isset( $atts['maxResults'] )? $atts['maxResults'] : 10,
+			'maxResults' => isset( $atts['maxresults'] )? $atts['maxresults'] : 10,
 		);
 		return $this->constructUrl( $baseURL, $args );
 	}
@@ -36,11 +36,11 @@ class SP_YTUBE_VIDEOS extends SP_YTUBE_SHORTCODE{
 	function getVideosFromChannelURL( $atts ){
 		$baseURL = $this->getBaseURL() . "search";
 		$args = array(
-			'part'	=> array( 'id', 'snippet' ),
-			'maxResults' => isset( $atts['maxResults'] )? $atts['maxResults'] : 10,
-			'key'	=> $this->getAPIKey(),
-			'channelId'	=> $atts['channel'],
-			'order'	=> 'date'
+			'part'				=> array( 'id', 'snippet' ),
+			'maxResults' 	=> isset( $atts['maxresults'] )? $atts['maxresults'] : 10,
+			'key'					=> $this->getAPIKey(),
+			'channelId'		=> $atts['channel'],
+			'order'				=> 'date'
 		);
 		return $this->constructUrl( $baseURL, $args );
 	}
