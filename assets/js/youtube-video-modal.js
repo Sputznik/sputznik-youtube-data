@@ -90,7 +90,7 @@ jQuery.fn.sp_ytube_playlist = function() {
 			var $innerSection = $parent.find('.sp-inner-section');
 			$innerSection.hide();
 			$innerSection.show('slow', function(){
-				$('html, body').animate({
+				jQuery('html, body').animate({
         	scrollTop: $innerSection.offset().top - 100
     		}, 2000 );
 
