@@ -5,6 +5,9 @@ class SP_YTUBE_PLAYLISTS extends SP_YTUBE_SHORTCODE{
 	function __construct(){
 		$this->shortcode_str = 'sp_ytube_playlists';
 
+		add_action( 'wp_ajax_nopriv_sp_ytube_playlist', array( $this, 'ajaxPlaylist' ) );
+		add_action( 'wp_ajax_sp_ytube_playlist', array( $this, 'ajaxPlaylist' ) );
+
 		add_action( $this->shortcode_str . "_prehook", function( $atts ){
 
 			if( isset( $_GET['playlistId'] ) && isset( $_GET['channelId'] ) && $_GET['channelId'] == $atts['channel'] ){
@@ -21,6 +24,13 @@ class SP_YTUBE_PLAYLISTS extends SP_YTUBE_SHORTCODE{
 		} );
 
 		parent::__construct();
+	}
+
+	function ajaxPlaylist(){
+		if( isset( $_GET['playlist'] ) ){
+			echo do_shortcode( "[sp_ytube_videos playlist='" . $_GET['playlist'] . "']" );
+		}
+		wp_die();
 	}
 
 	function getDefaultAtts(){

@@ -111,6 +111,7 @@
 	font-size: 40px;
 	outline: none;
 	background: none;
+	z-index: 100;
 }
 
 .arrow_box {

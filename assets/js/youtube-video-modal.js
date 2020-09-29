@@ -42,21 +42,71 @@ jQuery.fn.sp_ytube_playlist = function() {
 	return this.each( function() {
 
 		var $el 		= jQuery( this ),
+			$parent			= $el.closest( '.sp-ytube-playlists-row' ),
 			url					= $el.data( 'url' ),
 			channelId		= $el.data( 'channel' ),
 			title				= $el.data( 'title' ),
-			playlistId 	= $el.data( 'playlist' );
+			playlist 		= $el.data( 'playlist' );
 
 		// CREATES DYNAMIC VIDEO MODAL
 		$el.on( 'click', function() {
-			window.location.href = getUrl();
+
+			$parent.find( '.sp-inner-section' ).remove();
+
+			createModal();
+
 		} );
 
-		function getUrl(){
-			var url = window.location.href;
-			url = url.split('?')[0];
-			url += "?action=playlist&playlistId=" + playlistId + "&channelId=" + channelId + "&title=" + title;
-			return url;
+		function getData(){
+
+			var $el = $parent.find( '.sp-inner-section .sp-playlist-content' ).hide();
+
+			jQuery.ajax({
+				url: url,
+				data: {
+					action: 'sp_ytube_playlist',
+					playlist: playlist
+				},
+				success: function( data ){
+					$el.html( data );
+					$el.show( 'slow' );
+					$el.find( '[data-behaviour~=sp-ytube-video]' ).sp_ytube_video();
+				}
+			});
+
+		}
+
+		// VIDEO MODAL LAYOUT
+		function createModal() {
+
+			var html = '<div class="sp-inner-section arrow_box">';
+			html += '<button class="sp-close-btn">&times;</button>';
+			html += '<div class="sp-playlist-title">' + title + '</div>';
+			html += '<div class="sp-playlist-content"></div>';
+			html +=	'</div>';
+
+      $parent.prepend( html );
+
+			var $innerSection = $parent.find('.sp-inner-section');
+			$innerSection.hide();
+			$innerSection.show('slow', function(){
+				$('html, body').animate({
+        	scrollTop: $innerSection.offset().top - 100
+    		}, 2000 );
+
+				getData();
+
+			});
+
+			$innerSection.find( '.sp-close-btn' ).each( function(){
+				var $close_btn = jQuery( this );
+				$close_btn.click( function( ev ){
+					ev.preventDefault();
+					$innerSection.hide('slow', function(){
+						$innerSection.remove();
+					});
+				} );
+			} );
 		}
 
 	});
@@ -67,18 +117,5 @@ jQuery(document).ready(function () {
 	jQuery('[data-behaviour~=sp-ytube-video]').sp_ytube_video();
 	jQuery('[data-behaviour~=sp-ytube-playlist]').sp_ytube_playlist();
 
-	jQuery( '.sp-close-btn' ).each( function(){
-		var $close_btn = jQuery( this );
 
-		$close_btn.click( function( ev ){
-			ev.preventDefault();
-
-			var section = $close_btn.closest('.sp-inner-section');
-
-			section.hide('slow', function(){
-				section.remove();
-			});
-		} );
-
-	} );
 });
