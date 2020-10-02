@@ -9,6 +9,18 @@
 			$this->read_settings();
 
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+
+			/* ENQUEUE SCRIPTS ON ADMIN DASHBOARD */
+			add_action( 'admin_enqueue_scripts', array( $this, 'wp_admin_script') );
+		}
+
+		function wp_admin_script( $hook ) {
+
+			global $post_type;
+
+			wp_enqueue_script( 'ytube-repeater', plugins_url( 'sputznik-youtube-data/assets/js/ytube-repeater.js' ), array( 'jquery', 'orbit-repeater' ), SP_YTUBE_VERSION, true );
+
+			//wp_enqueue_style( 'orbit-admin', plugins_url( 'orbit-bundle/dist/css/admin-style.css' ), array(), ORBIT_BUNDLE_VERSION );
 		}
 
 		function admin_menu() {

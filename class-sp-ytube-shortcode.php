@@ -147,6 +147,7 @@
 		function is_valid_item( $id ){
 			$admin_settings = $this->get_admin_settings();
 			$hide_items = isset( $admin_settings['hide'] ) ? $admin_settings['hide'] : array();
+			$hide_items = str_replace( '\r', '', $hide_items );
 			if( in_array( $id, $hide_items ) ) {
 				return false;
 			}

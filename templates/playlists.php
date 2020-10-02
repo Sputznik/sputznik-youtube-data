@@ -1,3 +1,10 @@
+<?php
+	$admin_settings = $this->get_admin_settings();
+	$hide_items = isset( $admin_settings['hide'] ) ? $admin_settings['hide'] : array();
+?>
+<script>
+	var hide = <?php echo json_encode( $hide_items );?>;
+</script>
 <div class="sp-ytube-playlists-row">
 	<?php if( isset( $response->items ) ): ?>
 	<div class="sp-ytube-playlists sp-three-grid">

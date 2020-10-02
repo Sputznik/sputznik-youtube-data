@@ -1,64 +1,64 @@
 <?php
 
-	if( isset( $_POST['list'] ) ){
-
-		$ids = explode( PHP_EOL, $_POST['list'] );
-
-		/*
-		echo "<pre>";
-		print_r( $ids );
-		echo "</pre>";
-		*/
+	if( isset( $_POST['list_ids'] ) && is_array( $_POST['list_ids'] ) && count( $_POST['list_ids'] ) ){
 
 		$images_list = array();
-		foreach( $ids as $id ){
-			$image_item = explode( '#', $id );
 
-			if( count( $image_item ) > 1 ){
-				$images_list[ $image_item[0] ] = $image_item[1];
-			}
-
+		foreach( $_POST['list_ids'] as $list_id ){
+			$images_list[ $list_id['id'] ] = $list_id['url'];
 		}
 
-		/*
-		echo "<pre>";
-		print_r( $images_list );
-		echo "</pre>";
-		*/
+		//print_r( $images_list );
 
 		$settings = $this->get_settings();
 		$settings['images'] = $images_list;
 		$this->write_settings( $settings );
 
-		//print_r( $settings );
+
 
 	}
 
 	$settings = $this->get_settings();
 
-	$image_list = isset( $settings['images'] ) ? $settings['images'] : array();
-	$text = "";
-	if( is_array( $image_list ) && count( $image_list ) ){
-		foreach ($image_list as $key => $value) {
-			$text .= $key . "#" . $value . PHP_EOL;
+	$rows = array();
+	if( isset( $settings['images'] ) && is_array( $settings['images'] ) && count( $settings['images'] ) ){
+		foreach( $settings['images'] as $id => $url ){
+			$temp = array( 'id' => $id, 'url' => $url );
+			array_push( $rows, $temp );
 		}
 	}
 
 
-	//print_r( $image_list );
+	$fields = array(
+		'id'	=> array(
+			'type'	=> 'text',
+			'text'	=> 'Enter Playlist/Video ID',
+		),
+		'url'	=> array(
+			'type'	=> 'text',
+			'text'	=> 'Enter URL of the image',
+		)
+	);
+
 
 ?>
 
 <form method="POST">
-  <div>
-		<br>
-    <textarea class="large-text" rows="10" col="50" name="list"><?php echo $text;?></textarea>
-  </div>
+  <div data-behaviour="ytube-repeater" data-slug="list_ids" data-rows='<?php echo json_encode( $rows );?>' data-fields='<?php echo json_encode( $fields );?>'></div>
 	<p class="help">Add the ID of playlist/video which are meant to be hidden in each new line.</p>
   <p class='submit'><input type="submit" name="submit" class="button button-primary" value="Save Changes"><p>
 </form>
 <style>
-	textarea.large-text{
-		max-width: 900px;
+	label{
+		display: block;
+		margin-bottom: 10px;
 	}
+	.orbit-choice-item{
+		background: #fff;
+		margin-bottom: 15px;
+		position: relative;
+		padding: 10px;
+		padding-bottom: 0;
+	}
+	.orbit-choice-item .list-content{ padding-bottom: 10px; }
 </style>
