@@ -71,8 +71,8 @@
 
 #sp-ytube-modal .sp-ytube-modal-close-btn{
 	position: absolute;
-	top: 10%;
-	right: 10%;
+	top: 20px;
+	right: 20px;
 	background: none;
 	border: none;
 	color: #fff;
@@ -81,11 +81,12 @@
 }
 
 #sp-ytube-modal .sp-ytube-modal-body{
+	padding: 20px;
 	position: absolute;
 	width: 90%;
-	max-width: 900px;
-	max-height: 500px;
-	height: 80%;
+	max-width: 1100px;
+	max-height: 650px;
+	height: 57.5vw;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -142,4 +143,33 @@
 	border-top-color: #eeeeee;
 	border-width: 24px;
 	margin-left: -24px;
+}
+
+.sp-ytube-video{
+	cursor: pointer;
+	position: relative;
+}
+.sp-ytube-video .sp-ytube-video-image{
+	background-size: cover;
+	background-position: center;
+	padding-bottom: 55.7%;
+	width: 100%;
+	position: relative;
+}
+.sp-ytube-video .sp-ytube-video-image::after{
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	position: absolute;
+	background-image: url('../images/red-play-btn.png');
+	background-size: contain;
+	content: "";
+	width: 100px;
+	height: 100px;
+}
+
+.sp-grid-item .sp-ytube-video .sp-ytube-video-image::after{
+	width: 30px;
+	height: 30px;
 }

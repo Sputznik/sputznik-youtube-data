@@ -27,7 +27,6 @@
 
 			$url = $this->getAPIURL( $atts );
 
-
 			//echo $url;
 
 			if( $url ){
