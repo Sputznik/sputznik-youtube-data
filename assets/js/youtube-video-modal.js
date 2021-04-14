@@ -11,7 +11,7 @@ jQuery.fn.sp_ytube_video = function() {
 		});
 
 		function getYoutubeURL(){
-			return "https://www.youtube.com/embed/" + video_id + "?autoplay=1";
+			return "https://www.youtube.com/embed/" + video_id + "?autoplay=1&rel=0";
 		}
 
     // VIDEO MODAL LAYOUT
