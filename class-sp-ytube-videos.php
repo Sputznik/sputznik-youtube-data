@@ -36,6 +36,7 @@ class SP_YTUBE_VIDEOS extends SP_YTUBE_SHORTCODE{
 	function getVideosFromChannelURL( $atts ){
 		$baseURL = $this->getBaseURL() . "search";
 		$args = array(
+			'type'				=> 'video',
 			'part'				=> array( 'id', 'snippet' ),
 			'maxResults' 	=> isset( $atts['maxresults'] )? $atts['maxresults'] : 10,
 			'key'					=> $this->getAPIKey(),
