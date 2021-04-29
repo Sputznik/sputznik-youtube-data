@@ -18,7 +18,7 @@ class SP_SOW_VIDEO_POPUP extends SiteOrigin_Widget{
         'label'   => __( 'Choose video type', 'siteorigin-widgets' ),
         'options' => array(
 					'youtube'		=> 'Youtube',
-					'wordpress'	=> 'By URL'
+					'wordpress'	=> 'Self Hosted'
 				),
 				'state_emitter' => array(
         	'callback' 	=> 'select',
