@@ -1,3 +1,44 @@
+jQuery.fn.sp_wp_video = function() {
+
+	return this.each( function() {
+
+		var $el 		= jQuery( this ),
+			video_url = $el.data( 'video' );
+
+    // CREATES DYNAMIC VIDEO MODAL
+		$el.on( 'click', function() {
+			createModal();
+		});
+
+		function getVideoURL(){
+			return video_url;
+		}
+
+    // VIDEO MODAL LAYOUT
+		function createModal() {
+			var html = '<div id="sp-ytube-modal">';
+			html += '<button class="sp-ytube-modal-close-btn">&times;</button>';
+			html += '<div class="sp-ytube-modal-body">';
+
+			html += '<video class="sp-wp-video" controls autoplay><source src="';
+			html += getVideoURL();
+			html += '" type="video/mp4"></video>';
+
+			html +=	'</div></div>';
+
+      jQuery("body").append( html );
+
+			jQuery( '#sp-ytube-modal .sp-ytube-modal-close-btn' ).click( function( ev ){
+				ev.preventDefault();
+				jQuery( '#sp-ytube-modal' ).remove();
+			});
+
+    }
+
+	});
+
+};
+
 jQuery.fn.sp_ytube_video = function() {
 
 	return this.each( function() {
@@ -115,6 +156,7 @@ jQuery.fn.sp_ytube_playlist = function() {
 
 jQuery(document).ready(function () {
 	jQuery('[data-behaviour~=sp-ytube-video]').sp_ytube_video();
+	jQuery('[data-behaviour~=sp-wp-video]').sp_wp_video();
 	jQuery('[data-behaviour~=sp-ytube-playlist]').sp_ytube_playlist();
 
 

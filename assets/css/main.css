@@ -156,7 +156,7 @@
 	width: 100%;
 	position: relative;
 }
-.sp-ytube-video .sp-ytube-video-image::after{
+.sp-ytube-video .sp-ytube-video-image::after, .sp-wp-video::after{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -172,4 +172,12 @@
 .sp-grid-item .sp-ytube-video .sp-ytube-video-image::after{
 	width: 30px;
 	height: 30px;
+}
+
+.sp-wp-video{
+	position: relative;
+}
+
+.sp-wp-video video, .sp-ytube-modal-body video{
+	width:100%;
 }

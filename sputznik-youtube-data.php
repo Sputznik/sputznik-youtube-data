@@ -16,6 +16,7 @@
 		"class-sp-ytube-shortcode.php",
 		"class-sp-ytube-videos.php",
 		"class-sp-ytube-video.php",
+		"class-sp-wp-video.php",
 		"class-sp-ytube-playlists.php"
 	);
 
