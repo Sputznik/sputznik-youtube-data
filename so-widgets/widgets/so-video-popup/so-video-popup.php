@@ -12,7 +12,14 @@ class SP_SOW_VIDEO_POPUP extends SiteOrigin_Widget{
   function __construct(){
 
     $form_options = array(
-
+			'thumbnail_id' => array(
+				'type' 			=> 'media',
+				'label' 		=> __( 'Choose Thumbnail', 'siteorigin-widgets' ),
+				'choose' 		=> __( 'Choose image', 'siteorigin-widgets' ),
+				'update' 		=> __( 'Set image', 'siteorigin-widgets' ),
+				'library' 	=> 'image',
+				'fallback' 	=> true
+			),
 			'video_type' => array(
         'type'    => 'select',
         'label'   => __( 'Choose video type', 'siteorigin-widgets' ),
@@ -34,12 +41,13 @@ class SP_SOW_VIDEO_POPUP extends SiteOrigin_Widget{
 	    	),
       ),
 			'video_url' => array(
-        'type' 		=> 'text',
+        'type' 		=> 'link',
         'label' 	=> __( 'Video URL', 'siteorigin-widgets' ),
 				'state_handler' => array(
 	        'video_type[youtube]' 	=> array('hide'),
 	        'video_type[wordpress]' => array('show'),
 	    	),
+
       ),
     );
 

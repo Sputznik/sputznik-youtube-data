@@ -17,6 +17,8 @@ class SP_WP_VIDEO extends SP_YTUBE_SHORTCODE{
 	function shortcode( $atts ){
 		$atts = $this->getShortcodeAtts( $atts );
 
+		//print_r( $atts );
+
 		ob_start();
 
 		$template = $this->getTemplate( $atts );
