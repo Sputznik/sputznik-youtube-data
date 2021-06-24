@@ -20,12 +20,22 @@ class SP_SOW_VIDEO_POPUP extends SiteOrigin_Widget{
 				'library' 	=> 'image',
 				'fallback' 	=> true
 			),
+      'play_btn_img' => array(
+				'type' 			=> 'media',
+				'label' 		=> __( 'Choose Play Button', 'siteorigin-widgets' ),
+				'choose' 		=> __( 'Choose image', 'siteorigin-widgets' ),
+				'update' 		=> __( 'Set image', 'siteorigin-widgets' ),
+				'library' 	=> 'image',
+				'fallback' 	=> false,
+        'description' => 'If no image is selected the default play button image will be used.',
+			),
 			'video_type' => array(
         'type'    => 'select',
         'label'   => __( 'Choose video type', 'siteorigin-widgets' ),
         'options' => array(
 					'youtube'		=> 'Youtube',
-					'wordpress'	=> 'Self Hosted'
+					'wordpress'	=> 'Self Hosted',
+          'vimeo'     =>  'Vimeo'
 				),
 				'state_emitter' => array(
         	'callback' 	=> 'select',
@@ -34,10 +44,11 @@ class SP_SOW_VIDEO_POPUP extends SiteOrigin_Widget{
       ),
 			'video_id' => array(
         'type' 		=> 'text',
-        'label' 	=> __( 'Youtube Video ID', 'siteorigin-widgets' ),
+        'label' 	=> __( 'Video ID', 'siteorigin-widgets' ),
 				'state_handler' => array(
 	        'video_type[youtube]' => array('show'),
 	        'video_type[wordpress]' => array('hide'),
+          'video_type[vimeo]' => array('show')
 	    	),
       ),
 			'video_url' => array(
@@ -46,6 +57,7 @@ class SP_SOW_VIDEO_POPUP extends SiteOrigin_Widget{
 				'state_handler' => array(
 	        'video_type[youtube]' 	=> array('hide'),
 	        'video_type[wordpress]' => array('show'),
+          'video_type[vimeo]' 	=> array('hide')
 	    	),
 
       ),

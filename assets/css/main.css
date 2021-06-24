@@ -145,18 +145,21 @@
 	margin-left: -24px;
 }
 
-.sp-ytube-video{
+.sp-ytube-video, .sp-vimeo-video{
 	cursor: pointer;
 	position: relative;
 }
-.sp-ytube-video .sp-ytube-video-image{
+.sp-ytube-video .sp-ytube-video-image,
+.sp-vimeo-video .sp-vimeo-video-image{
 	background-size: cover;
 	background-position: center;
 	padding-bottom: 55.7%;
 	width: 100%;
 	position: relative;
 }
-.sp-ytube-video .sp-ytube-video-image::after, .sp-wp-video::after{
+.sp-ytube-video .sp-ytube-video-image::after,
+.sp-vimeo-video .sp-vimeo-video-image::after,
+.sp-wp-video::after{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);

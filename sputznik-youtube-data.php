@@ -17,6 +17,7 @@
 		"class-sp-ytube-videos.php",
 		"class-sp-ytube-video.php",
 		"class-sp-wp-video.php",
+		"class-sp-vimeo-video.php",
 		"class-sp-ytube-playlists.php",
 		"so-widgets/so-widgets.php"
 	);
@@ -29,3 +30,8 @@
 		wp_enqueue_script( 'sp-ytube-video', plugins_url( 'sputznik-youtube-data/assets/js/youtube-video-modal.js' ), array('jquery'), SP_YTUBE_VERSION, true );
 		wp_enqueue_style( 'sp-ytube', plugins_url( 'sputznik-youtube-data/assets/css/main.css' ), array(), SP_YTUBE_VERSION );
 	} );
+
+
+	function sp_ytube_unique_widget_id( $data ){
+	  return substr( md5( json_encode( $data ) ), 0, 8 );
+	}
