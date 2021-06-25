@@ -10,7 +10,8 @@ class SP_WP_VIDEO extends SP_YTUBE_SHORTCODE{
 	function getDefaultAtts(){
 		return array(
 			'video_url'	 		=> '',
-			'thumbnail'			=> ''
+			'thumbnail'			=> '',
+			'play_btn'			=> ''
 		);
 	}
 

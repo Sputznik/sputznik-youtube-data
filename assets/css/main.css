@@ -145,7 +145,7 @@
 	margin-left: -24px;
 }
 
-.sp-ytube-video, .sp-vimeo-video{
+.sp-ytube-video, .sp-vimeo-video, .sp-wp-video{
 	cursor: pointer;
 	position: relative;
 }

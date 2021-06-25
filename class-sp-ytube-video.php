@@ -10,13 +10,14 @@ class SP_YTUBE_VIDEO extends SP_YTUBE_SHORTCODE{
 	function getDefaultAtts(){
 		return array(
 			'video_id'	 		=> '',
-			'thumbnail'			=> ''
+			'thumbnail'			=> '',
+			'play_btn'			=> ''
 		);
 	}
 
 	function shortcode( $atts ){
 		$atts = $this->getShortcodeAtts( $atts );
-		
+
 		if( !isset( $atts[ 'thumbnail' ] ) || ( empty( $atts[ 'thumbnail' ] ) ) ){
 			$atts[ 'thumbnail' ] = $this->get_thumbnail( $atts['video_id'] );
 		}
