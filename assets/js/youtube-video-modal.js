@@ -199,5 +199,69 @@ jQuery(document).ready(function () {
 	jQuery('[data-behaviour~=sp-vimeo-video]').sp_vimeo_video();
 	jQuery('[data-behaviour~=sp-ytube-playlist]').sp_ytube_playlist();
 
+	/**
+	 * DYNAMIC VIDEO MODAL
+	 * SUPPORTED_VIDEO_TYPES: YOUTUBE, VIMEO, WP
+	 */
+	jQuery('body').on('click', `[data-behaviour~=sp-ytube-video-dynamic], [data-behaviour~=sp-vimeo-video-dynamic],
+								[data-behaviour~=sp-wp-video-dynamic]`, function(){
+
+		var element = jQuery(this);
+
+		var modal_config = {
+			$el: element,
+			init(){
+				this.showModal();
+			},
+			showModal(){
+	      jQuery("body").append( this.getModal ); // APPEND MODAL TO THE DOM
+				this.closeModal();	// ATTACH HANDLER TO CLOSE THE MODAL
+			},
+			closeModal(){
+				jQuery( '#sp-ytube-modal .sp-ytube-modal-close-btn' ).click( function( e ){
+					e.preventDefault();
+					jQuery( '#sp-ytube-modal' ).remove();
+				});
+			},
+			get getVideoURL(){
+				return jQuery(this.$el).data('video');
+			},
+			get getVideoType(){
+				return jQuery(this.$el).data('behaviour');
+			},
+			get getModal(){
+				return `<div id="sp-ytube-modal">
+					<button class="sp-ytube-modal-close-btn">&times;</button>
+					<div class="sp-ytube-modal-body">
+					 ${this.getVideoContainer}
+					</div>
+				</div>`;
+			},
+			get getVideoContainer(){
+				var type = this.getVideoType;
+
+				// RETURN VIDEO CONTAINER
+				switch ( type ) {
+					case 'sp-ytube-video-dynamic':
+								return `<iframe allow="autoplay" src="https://www.youtube.com/embed/${this.getVideoURL}?autoplay=1&rel=0"></iframe>`;
+
+					case 'sp-vimeo-video-dynamic':
+							return `<iframe allow="autoplay" src="https://player.vimeo.com/video/${this.getVideoURL}" frameborder="0"
+											webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
+
+					case 'sp-wp-video-dynamic':
+								return `<video class="sp-wp-video" controls autoplay><source src="${this.getVideoURL}" type="video/mp4"></video>`;
+				}
+			}
+
+		}; // END modal_config
+
+		// console.log(modal_config);
+
+		// INITIALIZE DYNAMIC MODAL
+		modal_config.init();
+
+	});
+
 
 });
